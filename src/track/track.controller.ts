@@ -7,6 +7,7 @@ import {
   Post,
   Patch,
   UploadedFiles,
+  Query,
 } from '@nestjs/common';
 import CreateTrackDto from './dto/create-track.dto';
 import CreateTCommentDto from './dto/create-comment.dto';
@@ -33,8 +34,13 @@ export class TrackController {
   }
 
   @Get()
-  getAll() {
-    return this.trackService.getAll();
+  getAll(@Query('count') count: number, @Query('offset') offset: number) {
+    return this.trackService.getAll(count, offset);
+  }
+
+  @Get('/search')
+  search(@Query('query') query: string) {
+    return this.trackService.search(query);
   }
 
   @Get(':id')
@@ -49,12 +55,16 @@ export class TrackController {
 
   @Patch(':id')
   update(@Param('id') id: ObjectId, @Body() dto: UpdateTrackDto) {
-    console.log(dto);
     return this.trackService.update(id, dto);
   }
 
   @Post('/comment')
   createComment(@Body() dto: CreateTCommentDto) {
     return this.trackService.createComment(dto);
+  }
+
+  @Get('/listen/:id')
+  createListen(@Param('id') id: ObjectId) {
+    return this.trackService.createListen(id);
   }
 }
