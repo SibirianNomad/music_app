@@ -1,6 +1,8 @@
 # Music application
 
-#### Make sure that your database config DB_NAME, DB_USER, DB_PASS in .env is correct
+### Make sure that your database config DB_NAME, DB_USER, DB_PASS in .env is correct
+
+### Application works with MongoDB
 
 ### Install all dependencies
 
