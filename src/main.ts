@@ -6,6 +6,7 @@ const start = async () => {
   try {
     const PORT = process.env.PORT || 5000;
     const app = await NestFactory.create(AppModule);
+    app.setGlobalPrefix('api');
     app.enableCors();
     const config = new DocumentBuilder()
       .setTitle('Music App')
@@ -13,7 +14,7 @@ const start = async () => {
       .setVersion('0.0.1')
       .build();
     const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('api', app, document);
+    SwaggerModule.setup('api/documentation', app, document);
     await app.listen(PORT, () => {
       console.log('Server started on PORT ' + PORT);
     });

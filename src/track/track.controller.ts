@@ -10,13 +10,15 @@ import {
   Query,
 } from '@nestjs/common';
 import CreateTrackDto from './dto/create-track.dto';
-import CreateTCommentDto from './dto/create-comment.dto';
+import CreateCommentDto from './dto/create-comment.dto';
 import UpdateTrackDto from './dto/update-track.dto';
 import { TrackService } from './track.service';
 import { ObjectId } from 'mongoose';
 import { UseInterceptors } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('tracks')
 @Controller('/tracks')
 export class TrackController {
   constructor(private trackService: TrackService) {}
@@ -59,7 +61,7 @@ export class TrackController {
   }
 
   @Post('/comment')
-  createComment(@Body() dto: CreateTCommentDto) {
+  createComment(@Body() dto: CreateCommentDto) {
     return this.trackService.createComment(dto);
   }
 

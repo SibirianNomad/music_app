@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Track, TrackDocument } from './schemas/track.schema';
 import { Comment, CommentDocument } from './schemas/comment.schema ';
 import CreateTrackDto from './dto/create-track.dto';
-import CreateTCommentDto from './dto/create-comment.dto';
+import CreateCommentDto from './dto/create-comment.dto';
 import UpdateTrackDto from './dto/update-track.dto';
 import { FileService, FileType } from '../file/file.service';
 import { Album, AlbumDocument } from '../album/schemas/album.schema';
@@ -62,7 +62,7 @@ export class TrackService {
     return track;
   }
 
-  async createComment(dto: CreateTCommentDto): Promise<Comment> {
+  async createComment(dto: CreateCommentDto): Promise<Comment> {
     const track = await this.trackModel.findById(dto.trackId);
     const comment = await this.commentModel.create({ ...dto });
     track.comments.push(comment.id);
