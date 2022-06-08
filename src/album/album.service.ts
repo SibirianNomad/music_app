@@ -15,8 +15,8 @@ export class AlbumService {
     return album;
   }
 
-  async getAll(): Promise<Album[]> {
-    const albums = await this.albumModel.find();
+  async getAll(count = 10, offset = 0): Promise<Album[]> {
+    const albums = await this.albumModel.find().skip(offset).limit(count);
     return albums;
   }
 
